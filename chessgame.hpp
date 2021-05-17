@@ -23,9 +23,12 @@ public:
     ChessGame(int height = 8, int width = 8) : height(height), width(width), king_w_rPos(-1), king_w_cPos(-1), king_b_rPos(-1), king_b_cPos(-1), scr_w(0), scr_b(0) {
         gameBoard.reserve(height*width);
         for(int r = 0; r < height; r++) {
+			vector<ChessPiece *> row;
+			row.reserve(width);
             for(int c = 0; c < width; c++) {
-                gameBoard.emplaceBack();
+                row.emplace_back();
             }
+			gameBoard.emplace_back(row);
         }
     }
 
@@ -37,7 +40,7 @@ public:
         }
     }
 
-    initializeBoard_default() {
+    void initializeBoard_default(void) {
         
         constexpr int king_w_start_row = 7;
         constexpr int king_w_start_col = 4;
@@ -124,20 +127,34 @@ public:
     }
 
     bool squareIsWhite(int r, int c) {
-
+		return false;
     }
 
     void printBoard(ostream& sout, bool showColor) {
         for(int r = 0; r < height; r++) {
             for(int c = 0; c < width; c++) {
                 if(gameBoard[r][c]) {
-                    gameBoard[r][c].print(sout, showColor);
+                    gameBoard[r][c]->print(sout, showColor);
                     if(c != width-1) sout << " ";
-                }
+                } else {
+					if(showColor) {
+						sout << "  ";
+					} 
+					sout << '.';
+					if(c != width-1) sout << " ";
+				}
             }
             sout << endl;
         }
     }
+	
+	/*bool placePiece(ChessPiece *piece, int r, int c) {
+		
+	}
+	
+	bool removePiece(ChessPiece *piece, int r, int c) {
+		
+	}*/
 
     /*bool makeMove(int sourceR, int sourceC, int destR, int destC) {
         if(sourceR < 0 || sourceR >= height || sourceC < 0 || sourceC >= width || destR < 0 || destR >= height || destC < 0 || destC >= width) return false;

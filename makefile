@@ -80,7 +80,7 @@ push:
 	git status
 
 # compile run harness
-RunChess: chessgame.hpp Collatz.cpp RunChess.cpp
+RunChess: chessgame.hpp chesspiece.hpp RunChess.cpp
 	-$(CPPCHECK) chessgame.hpp
 	-$(CPPCHECK) chesspiece.hpp
 	-$(CPPCHECK) RunChess.cpp
