@@ -4,41 +4,54 @@
 class ChessPiece {
     char name;
     int value;
+    int color;
+    static constexpr char colorNames[2] = ['w','b'];
     ChessPiece(char name, int value) : name(name), value(value) {}
+    void print(ostream& sout, bool showColor) {
+        if(showColor)
+            sout << colorNames[color] << " " << name;
+        else
+        {
+            sout << name;
+        }
+    }
 };
 
 class King : public ChessPiece {
-    King() : ChessPiece('K', 0) {
+    bool hasMoved;
+    King(int color) : ChessPiece('K', 0, color), hasMoved(false) {
 
     }
 };
 
 class Pawn : public ChessPiece {
-    Pawn() : ChessPiece('p', 1) {
+    Pawn(int color) : ChessPiece('p', 1, color) {
 
     }
 };
 
 class Knight : public ChessPiece {
-    Knight() : ChessPiece('N', 3) {
+    Knight(int color) : ChessPiece('N', 3, color) {
 
     }
 };
 
 class Bishop : public ChessPiece {
-    Bishop() : ChessPiece('B', 3) {
+    Bishop(int color) : ChessPiece('B', 3, color) {
 
     }
 };
 
 class Rook : public ChessPiece {
-    Rook() : ChessPiece('R', 5) {
+    Rook(int color) : ChessPiece('R', 5, color) {
 
     }
 };
 
 class Queen : public ChessPiece {
-    Queen() : ChessPiece('Q',9);
+    Queen(int color) : ChessPiece('Q',9, color) {
+
+    }
 };
 
 #endif
