@@ -19,6 +19,12 @@ public:
             sout << name;
         }
     }
+	virtual bool canCapture(int diffX, int diffY, ChessPiece *target) = 0;
+	virtual bool canMove(int diffX, int diffY) = 0;
+	friend bool isAlly(ChessPiece *p1, ChessPiece *p2) {
+		return p1->color == p2->color;
+	}
+	virtual ~ChessPiece() {} 
 };
 
 class King : public ChessPiece {
@@ -27,6 +33,16 @@ public:
     King(int color) : ChessPiece('K', 0, color), hasMoved(false) {
 
     }
+	~King() {}
+	bool canCapture(int diffX, int diffY, ChessPiece *target) {
+		if(diffX == 0 && diffY == 0) return false;
+		if(!isAlly(this, target)) {
+			if(abs(diffX) <= 1 && abs(diffY) <= 1) {
+				return true;
+			}	
+		}
+		return false;
+	}
 };
 
 class Pawn : public ChessPiece {

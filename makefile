@@ -80,11 +80,11 @@ push:
 	git status
 
 # compile run harness
-RunChess: chessgame.hpp chesspiece.hpp RunChess.cpp
-	-$(CPPCHECK) chessgame.hpp
-	-$(CPPCHECK) chesspiece.hpp
+RunChess: chessgame.hpp chesspiece.hpp chessgame.cpp chesspiece.cpp RunChess.cpp
+	-$(CPPCHECK) chessgame.cpp
+	-$(CPPCHECK) chesspiece.cpp
 	-$(CPPCHECK) RunChess.cpp
-	$(CXX) $(CXXFLAGS) chessgame.hpp chesspiece.hpp RunChess.cpp -o RunChess
+	$(CXX) $(CXXFLAGS) chessgame.cpp chesspiece.cpp RunChess.cpp -o RunChess
 
 # compile test harness
 TestCollatz: Collatz.hpp Collatz.cpp TestCollatz.cpp
