@@ -19,10 +19,13 @@ class ChessGame {
     int king_b_cPos;
     int scr_w;
     int scr_b;
+	int turnNumber;
 	bool active;
 	bool whiteToMove;
+	ChessPiece *whiteKing;
+	ChessPiece *blackKing;
 public:
-    ChessGame(int height = 8, int width = 8) : height(height), width(width), king_w_rPos(-1), king_w_cPos(-1), king_b_rPos(-1), king_b_cPos(-1), scr_w(0), scr_b(0), whiteToMove(true) {
+    ChessGame(int height = 8, int width = 8) : height(height), width(width), king_w_rPos(-1), king_w_cPos(-1), king_b_rPos(-1), king_b_cPos(-1), scr_w(0), scr_b(0), turnNumber(-1), active(false), whiteToMove(true) {
         gameBoard.reserve(height*width);
         for(int r = 0; r < height; r++) {
 			vector<ChessPiece *> row;
